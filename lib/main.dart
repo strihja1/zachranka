@@ -4,7 +4,7 @@ import 'package:zachranka/pages/loading.dart';
 import 'package:zachranka/pages/map_of_hospitals.dart';
 
 void main() => runApp(MaterialApp(
-  initialRoute: '/map_of_hospitals',
+  initialRoute: '/',
   routes: {
     '/': (context) => Home(),
     '/loading': (context) => Loading(),

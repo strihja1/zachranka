@@ -12,20 +12,20 @@ class Home extends StatefulWidget {
 }
 
 void _initCall() async {
-  await new CallNumber().callNumber('112');
+  await CallNumber().callNumber('155');
 }
 
+
 Position position;
-var addresses;
-var first;
+
 
 class _HomeState extends State<Home> {
-
+dynamic first;
 
    Future<Position> getPosition() async{
      position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
-     final coordinates = new Coordinates(position.latitude, position.longitude);
-     addresses = await Geocoder.local.findAddressesFromCoordinates(coordinates);
+     final Coordinates coordinates = Coordinates(position.latitude, position.longitude);
+     final List<Address> addresses = await Geocoder.local.findAddressesFromCoordinates(coordinates);
      first = addresses.first;
      setState(() {
      });
@@ -43,7 +43,8 @@ class _HomeState extends State<Home> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Záchranka'),
+        title: const Text('Záchranka'),
+        backgroundColor: Colors.red,
       ),
       body: Padding(
         padding: const EdgeInsets.all(24.0),
@@ -51,27 +52,33 @@ class _HomeState extends State<Home> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Text('Podržením tlačítka zavoláte pomoc', style: TextStyle(fontSize: 22,),),
+            const Text('Podržením tlačítka zavoláte pomoc', style: TextStyle(fontSize: 22,),),
             Center(
                 child: SizedBox(
-                  child: new RawMaterialButton(
-                    padding: EdgeInsets.all(24),
+                  child: RawMaterialButton(
+                    padding: const EdgeInsets.all(24),
                     onLongPress: _initCall,
                     fillColor: Colors.red,
-                    shape: CircleBorder(),
+                    shape: const CircleBorder(),
                     child: Icon(Icons.call, color: Colors.black, size: 40,), onPressed: () {}, ),
                 )),
             Column(
               children: <Widget>[
-                Text('GPS souřadnice'),
+                const Text('GPS souřadnice'),
                 if(position == null || first == null)
-                  Text('Načítání polohy')
+                  const Text('Načítání polohy')
                 else
-                  Column(
-                   children: <Widget>[
-                     Text('${position.latitude} ${position.longitude}'),
-                     Text( '${first.addressLine}')
-                   ],
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    child: Column(
+                     children: <Widget>[
+                       Text('${position.latitude} ${position.longitude}'),
+                       Padding(
+                         padding: const EdgeInsets.all(8.0),
+                         child: Text( '${first.addressLine}',textAlign: TextAlign.center,),
+                       )
+                     ],
+                    ),
                   )
 
               ],

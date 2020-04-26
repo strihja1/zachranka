@@ -12,17 +12,17 @@ class _AppDrawerState extends State<AppDrawer> {
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
-          AppBar(title: Text('Menu')),
+          AppBar(title: const Text('Menu'), backgroundColor: Colors.red,),
           ListTile(
-            title: Text('Domů'),
+            title: const Text('Domů'),
             onTap: () {
               Navigator.pushReplacementNamed(context, '/');
             },
           ),
           ListTile(
-            title: Text('Mapa nemocnic'),
+            title: const Text('Mapa nemocnic'),
             onTap: () {
-              Navigator.pushReplacementNamed(context, '/map_of_hospitals');
+              Navigator.pushNamed(context, '/map_of_hospitals');
             },
           ),
         ],
