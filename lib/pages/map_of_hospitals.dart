@@ -1,9 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:zachranka/pages/drawer.dart';
 import 'package:zachranka/pages/home.dart';
+import 'package:zachranka/src/locationsOfHospitals.dart' as locations;
 
 class MapOfHospitals extends StatefulWidget {
   @override
@@ -11,14 +12,25 @@ class MapOfHospitals extends StatefulWidget {
 }
 
 class _MapOfHospitalsState extends State<MapOfHospitals> {
-  final Completer<GoogleMapController> _controller = Completer();
-  final Geolocator geolocator = Geolocator()
-    ..forceAndroidLocationManager = true;
-
-  static final CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(position.latitude, position.longitude),
-    zoom: 14.4746,
-  );
+  final Map<String, Marker> _markers = {};
+  Future<void> _onMapCreated(GoogleMapController controller) async {
+    final getGoogleResults = await locations.getGoogleOffices();
+    setState(() {
+      _markers.clear();
+      for (final result in getGoogleResults.results) {
+        print(result.formatted_address);
+        print(result.geometry.location.lat);
+        final marker = Marker(
+          markerId: MarkerId(result.formatted_address),
+          position: LatLng(result.geometry.location.lat, result.geometry.location.lng),
+          infoWindow: InfoWindow(
+            title: result.name,
+          ),
+        );
+        _markers[result.formatted_address] = marker;
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,11 +40,12 @@ class _MapOfHospitalsState extends State<MapOfHospitals> {
         backgroundColor: Colors.red,
       ),
       body: GoogleMap(
-        mapType: MapType.hybrid,
-        initialCameraPosition: _kGooglePlex,
-        onMapCreated: (GoogleMapController controller) {
-          _controller.complete(controller);
-        },
+        onMapCreated: _onMapCreated,
+        initialCameraPosition: CameraPosition(
+          target: LatLng(position.latitude, position.longitude),
+          zoom: 14,
+        ),
+        markers: _markers.values.toSet(),
       ),
     );
   }
