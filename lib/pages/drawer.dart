@@ -12,7 +12,10 @@ class _AppDrawerState extends State<AppDrawer> {
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
-          AppBar(title: const Text('Menu'), backgroundColor: Colors.red,),
+          AppBar(
+            title: const Text('Menu'),
+            backgroundColor: Colors.red,
+          ),
           ListTile(
             title: const Text('Domů'),
             onTap: () {
@@ -23,6 +26,12 @@ class _AppDrawerState extends State<AppDrawer> {
             title: const Text('Mapa nemocnic'),
             onTap: () {
               Navigator.pushNamed(context, '/map_of_hospitals');
+            },
+          ),
+          ListTile(
+            title: const Text('Mapa lékáren'),
+            onTap: () {
+              Navigator.pushNamed(context, '/map_of_drugstores');
             },
           ),
         ],
