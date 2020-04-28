@@ -24,7 +24,8 @@ class _MapOfHospitalsState extends State<MapOfHospitals> {
           markerId: MarkerId(result.formatted_address),
           position: LatLng(result.geometry.location.lat, result.geometry.location.lng),
           infoWindow: InfoWindow(
-            title: result.name,
+              title: result.name,
+              snippet: result.formatted_address
           ),
         );
         _markers[result.formatted_address] = marker;
@@ -40,6 +41,9 @@ class _MapOfHospitalsState extends State<MapOfHospitals> {
         backgroundColor: Colors.red,
       ),
       body: GoogleMap(
+        myLocationEnabled: true,
+        myLocationButtonEnabled: true,
+        trafficEnabled: true,
         onMapCreated: _onMapCreated,
         initialCameraPosition: CameraPosition(
           target: LatLng(position.latitude, position.longitude),

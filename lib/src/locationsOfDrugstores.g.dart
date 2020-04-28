@@ -38,6 +38,7 @@ Map<String, dynamic> _$LocationToJson(Location instance) =>
 Result _$ResultFromJson(Map<String, dynamic> json) {
   return Result(
       formatted_address: json['formatted_address'] as String,
+      icon: json['icon'] as String,
       name: json['name'] as String,
       geometry: json['geometry'] == null
           ? null
@@ -46,6 +47,7 @@ Result _$ResultFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$ResultToJson(Result instance) => <String, dynamic>{
       'formatted_address': instance.formatted_address,
+      'icon': instance.icon,
       'name': instance.name,
       'geometry': instance.geometry
     };

@@ -48,6 +48,7 @@ class Location {
 class Result {
   Result({
     this.formatted_address,
+    this.icon,
     this.name,
     this.geometry
   });
@@ -56,6 +57,7 @@ class Result {
   Map<String, dynamic> toJson() => _$ResultToJson(this);
 
   final String formatted_address;
+  final String icon;
   final String name;
   final Geometry geometry;
 }

@@ -32,6 +32,7 @@ dependencies:
   location_permissions: ^2.0.5
   http: ^0.12.0+1
   json_serializable: ^2.0.2
+  flutter_cache_manager: ^1.2.2
 
 dev_dependencies:
   pedantic: ^1.4.0

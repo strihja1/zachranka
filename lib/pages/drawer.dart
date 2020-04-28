@@ -34,6 +34,12 @@ class _AppDrawerState extends State<AppDrawer> {
               Navigator.pushNamed(context, '/map_of_drugstores');
             },
           ),
+          ListTile(
+            title: const Text('První pomoc'),
+            onTap: () {
+              Navigator.pushReplacementNamed(context, '/first_aid');
+            },
+          ),
         ],
       ),
     );

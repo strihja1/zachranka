@@ -24,6 +24,7 @@ class _MapOfDrugstoresState extends State<MapOfDrugstores> {
           position: LatLng(result.geometry.location.lat, result.geometry.location.lng),
           infoWindow: InfoWindow(
             title: result.name,
+            snippet: result.formatted_address
           ),
         );
         _markers[result.formatted_address] = marker;
@@ -39,6 +40,10 @@ class _MapOfDrugstoresState extends State<MapOfDrugstores> {
         backgroundColor: Colors.red,
       ),
       body: GoogleMap(
+        myLocationEnabled: true,
+        myLocationButtonEnabled: true,
+        trafficEnabled: true,
+
         onMapCreated: _onMapCreated,
         initialCameraPosition: CameraPosition(
           target: LatLng(position.latitude, position.longitude),
