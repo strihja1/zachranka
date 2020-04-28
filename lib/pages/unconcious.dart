@@ -20,6 +20,10 @@ class _UnconsiousState extends State<Unconsious> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text("Je stav, kdy postižený nereaguje na hlasité oslovení a jemné zatřesení rameny. Vždy dbejte na svoji vlastní bezpečnost, i bezpečnost postiženého"),
+              Center(child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text("Pomoc při bezvědomí", style: TextStyle(fontSize:20, fontWeight: FontWeight.bold, ),),
+              )),
               _textWithPaddingAbove("1. Zprůchodněte dýchací cesty a zkontrolujte dýchání"),
               _textWithPaddingAbove("2. Zavolejte na tísňovou linku 155"),
               Center(child: Padding(

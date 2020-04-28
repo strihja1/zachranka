@@ -17,7 +17,7 @@ class _AppDrawerState extends State<AppDrawer> {
             backgroundColor: Colors.red,
           ),
           ListTile(
-            title: const Text('Domů'),
+            title: const Text('Hlavní strana'),
             onTap: () {
               Navigator.pushReplacementNamed(context, '/');
             },

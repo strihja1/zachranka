@@ -31,29 +31,21 @@ class _FirstAidState extends State<FirstAid> {
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
-            ListTile(
-              title: const Text('Bezvědomí'),
-              onTap: () {
-                Navigator.pushNamed(context, '/unconscious');
-              },
+            Card(
+              child: ListTile(
+                title: const Text('Bezvědomí'),
+                onTap: () {
+                  Navigator.pushNamed(context, '/unconscious');
+                },
+              ),
             ),
-            ListTile(
-              title: const Text('Dušení'),
-              onTap: () {
-                Navigator.pushNamed(context, '/suffocate');
-              },
-            ),
-            ListTile(
-              title: const Text('Krvácení'),
-              onTap: () {
-                Navigator.pushNamed(context, '/bleeding');
-              },
-            ),
-            ListTile(
-              title: const Text('Otrava'),
-              onTap: () {
-                Navigator.pushNamed(context, '/poisoning');
-              },
+            Card(
+              child: ListTile(
+                title: const Text('Dušení'),
+                onTap: () {
+                  Navigator.pushNamed(context, '/suffocate');
+                },
+              ),
             ),
           ],
         ),
