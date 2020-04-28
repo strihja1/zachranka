@@ -1,9 +1,4 @@
-import 'dart:async';
-
-import 'package:call_number/call_number.dart';
 import 'package:flutter/material.dart';
-import 'package:geocoder/geocoder.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:zachranka/pages/drawer.dart';
 
 class FirstAid extends StatefulWidget {
@@ -12,12 +7,6 @@ class FirstAid extends StatefulWidget {
 }
 
 class _FirstAidState extends State<FirstAid> {
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
