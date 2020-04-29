@@ -35,13 +35,13 @@ class _HomeState extends State<Home> {
     return position;
   }
 
-
   double _proximity;
   double _userAccelerometerX;
   double _userAccelerometerY;
   double _userAccelerometerZ;
-  List<StreamSubscription<dynamic>> _streamSubscriptions = <StreamSubscription<dynamic>>[];
-
+  List<StreamSubscription<dynamic>> _streamSubscriptions =
+      <StreamSubscription<dynamic>>[];
+  Timer timer;
 
   @override
   void initState() {
@@ -49,11 +49,13 @@ class _HomeState extends State<Home> {
     getPosition();
     initAccelometerState();
     initProximityState();
+    timer = Timer.periodic(Duration(seconds: 1), (Timer t) => getPosition());
   }
 
   @override
   void dispose() {
     super.dispose();
+    timer?.cancel();
     for (StreamSubscription<dynamic> subscription in _streamSubscriptions) {
       subscription.cancel();
     }
@@ -68,7 +70,8 @@ class _HomeState extends State<Home> {
   }
 
   void initAccelometerState() async {
-    _streamSubscriptions.add(userAccelerometerEvents.listen((UserAccelerometerEvent event) {
+    _streamSubscriptions
+        .add(userAccelerometerEvents.listen((UserAccelerometerEvent event) {
       setState(() {
         _userAccelerometerX = event.x;
         _userAccelerometerY = event.y;
@@ -90,9 +93,9 @@ class _HomeState extends State<Home> {
             _userAccelerometerY < -5 ||
             _userAccelerometerZ > 5 ||
             _userAccelerometerZ < -5) {
-          if(calling == false){
-          _initCall();
-          calling = false;
+          if (calling == false) {
+            _initCall();
+            calling = false;
           }
         }
         return RawMaterialButton(

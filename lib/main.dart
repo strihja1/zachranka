@@ -6,6 +6,7 @@ import 'package:zachranka/pages/map_of_drugstores.dart';
 import 'package:zachranka/pages/map_of_hospitals.dart';
 import 'package:zachranka/pages/suffocate.dart';
 import 'package:zachranka/pages/unconcious.dart';
+import 'package:zachranka/pages/user_card.dart';
 
 void main() => runApp(MaterialApp(
       initialRoute: '/',
@@ -17,5 +18,6 @@ void main() => runApp(MaterialApp(
         '/first_aid': (context) => FirstAid(),
         '/unconscious': (context) => Unconsious(),
         '/suffocate': (context) => Suffocate(),
+        '/user_card': (context) => UserCard(),
       },
     ));

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:zachranka/src/locationsOfDrugstores.dart' as locations;
 
-import 'drawer.dart';
 import 'home.dart';
 
 class MapOfDrugstores extends StatefulWidget {
@@ -11,7 +10,13 @@ class MapOfDrugstores extends StatefulWidget {
 }
 
 class _MapOfDrugstoresState extends State<MapOfDrugstores> {
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   final Map<String, Marker> _markers = {};
+
   Future<void> _onMapCreated(GoogleMapController controller) async {
     final getGoogleResults = await locations.getGoogleOffices();
     setState(() {
@@ -21,11 +26,10 @@ class _MapOfDrugstoresState extends State<MapOfDrugstores> {
         print(result.geometry.location.lat);
         final marker = Marker(
           markerId: MarkerId(result.formatted_address),
-          position: LatLng(result.geometry.location.lat, result.geometry.location.lng),
-          infoWindow: InfoWindow(
-            title: result.name,
-            snippet: result.formatted_address
-          ),
+          position: LatLng(
+              result.geometry.location.lat, result.geometry.location.lng),
+          infoWindow:
+              InfoWindow(title: result.name, snippet: result.formatted_address),
         );
         _markers[result.formatted_address] = marker;
       }
@@ -43,7 +47,6 @@ class _MapOfDrugstoresState extends State<MapOfDrugstores> {
         myLocationEnabled: true,
         myLocationButtonEnabled: true,
         trafficEnabled: true,
-
         onMapCreated: _onMapCreated,
         initialCameraPosition: CameraPosition(
           target: LatLng(position.latitude, position.longitude),

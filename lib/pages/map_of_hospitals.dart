@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:zachranka/pages/drawer.dart';
 import 'package:zachranka/pages/home.dart';
 import 'package:zachranka/src/locationsOfHospitals.dart' as locations;
 
@@ -12,7 +11,13 @@ class MapOfHospitals extends StatefulWidget {
 }
 
 class _MapOfHospitalsState extends State<MapOfHospitals> {
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   final Map<String, Marker> _markers = {};
+
   Future<void> _onMapCreated(GoogleMapController controller) async {
     final getGoogleResults = await locations.getGoogleOffices();
     setState(() {
@@ -22,11 +27,10 @@ class _MapOfHospitalsState extends State<MapOfHospitals> {
         print(result.geometry.location.lat);
         final marker = Marker(
           markerId: MarkerId(result.formatted_address),
-          position: LatLng(result.geometry.location.lat, result.geometry.location.lng),
-          infoWindow: InfoWindow(
-              title: result.name,
-              snippet: result.formatted_address
-          ),
+          position: LatLng(
+              result.geometry.location.lat, result.geometry.location.lng),
+          infoWindow:
+              InfoWindow(title: result.name, snippet: result.formatted_address),
         );
         _markers[result.formatted_address] = marker;
       }
